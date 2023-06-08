@@ -1,3 +1,8 @@
+//=============================
+// car management application
+//=============================
+
+// Import necessary JavaFX libraries
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -11,48 +16,45 @@ import javafx.stage.Stage;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.util.Duration;
+// Import additional Java libraries
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+/**
+ * Accepts the following car data from user input: (ID, Make, Model, HP).
+ * Stores the data and provides the ability to edit, delete and view the stored cars as a list.
+ * Regular expression specifies the ID and HP TextField input.
+*/
 public class Main extends Application {
+    /**
+     * Main class inherits the Application class to get
+     * the functionality to start and control an JavaFX application
+     */
     private ArrayList<Car> carList;
-    private ListView<Car> listView;
+    private ListView<Car> carListView;
     private Label errorLabel;
-    private int selectedIndex = -1;
+    private int selectedCarIndex = -1;
     private final String regex = "\\d+";
     private final ObservableList<Car> items = FXCollections.observableArrayList();
-    public static void main(String[] args) { launch(args); }
-
+    /**
+     * Program entry point
+     * Initializes the JavaFX environment and calls the "start" method to display the GUI.
+     * Starts the JavaFX application and initializes the JavaFX runtime.
+     * @param args String Array as parameter to pass arguments to the application.
+     */
+    public static void main(String[] args) {
+        launch(args);
+    }
+    /**
+     * GraphicalUserInterface(GUI) entry point
+     * The "start" method from the Application class gets overridden to provide custom implementation in a safe way.
+     * @param primaryStage window to display the GUI.
+     */
     @Override
     public void start(Stage primaryStage) {
-//--//----------//----------//----------//----------//----------//
-//---------- TABLE OF CONTENTS | STRUCTURE ----------//
-//----- stlye stuff: shadows|fonts|paddings|colors|backgrounds|borders|car arraylist
 
-//----- window content
-//------|---[wrapperBox]
-//----------|-----[wrapperHeaderLabel]
-//----------|-----[bodyBox]
-//----------------|----[menuBox]
-//---------------------|----[Buttons]
-//---------------------|----[buttonArray]
-//----------------|----[menuBox] add elements
-//----------------|----[inputGridPane]
-//---------------------|----[errorLabel]
-//---------------------|----[TextFields]
-//---------------------|----|----[ArrayList]
-//----------------|----[inputGridPane] add elements
-//----------------|----[listView]
-//----------|-----[bodyBox] add elements
-//------|---[wrapperBox] add elements
-//----------|-----[Buttons eventHandling]
-//----- [dummy data]
-//----- scene and primarystage
-
-//methods
-//--//----------//----------//----------//----------//----------//
 
     //----- style stuff -----//
         //  dropShadow default
@@ -229,11 +231,11 @@ public class Main extends Application {
                 inputGridPane.add(brandTextField, 0, 2);
                 inputGridPane.add(modelTextField, 0, 3);
                 inputGridPane.add(hpTextField, 0, 4);
-                // [wrapperBox]->[bodyBox listView]
-                listView = new ListView<>();
-                listView.setMinWidth(450);
+                // [wrapperBox]->[bodyBox carListView]
+                carListView = new ListView<>();
+                carListView.setMinWidth(450);
             // [wrapperBox]->[bodyBox] add elements
-            bodyBox.getChildren().addAll(menuBox, inputGridPane, listView);
+            bodyBox.getChildren().addAll(menuBox, inputGridPane, carListView);
         //----- [wrapperBox] add elements
         wrapperBox.getChildren().addAll(wrapperHeaderLabel, bodyBox);
     //  [wrapperBox]->[bodyBox]->[menuBox]->[Buttons eventHandling]
@@ -253,21 +255,21 @@ public class Main extends Application {
                 showError("correctInput", errorColor);
                 Car car = new Car(id, brand, model, hp);
                 carList.add(car);
-                listView.setItems(items);
-                listView.getItems().add(car);
-                listView.setPadding(paddingList);
+                carListView.setItems(items);
+                carListView.getItems().add(car);
+                carListView.setPadding(paddingList);
                 clearFields(idTextField, brandTextField, modelTextField, hpTextField);
                 errorLabel.setTextFill(Color.GREEN);
                 errorLabel.setText("car added".toUpperCase());
-                listView.refresh();
+                carListView.refresh();
             }
         });
         loadButton.setOnAction(event -> {
-            Car selectedCar = listView.getSelectionModel().getSelectedItem();
+            Car selectedCar = carListView.getSelectionModel().getSelectedItem();
             showError("correctInput", errorColor);
             if (selectedCar != null) {
                 selectedCar.getCar();
-                selectedIndex = carList.indexOf(selectedCar);
+                selectedCarIndex = carList.indexOf(selectedCar);
                 intToText(idTextField, selectedCar.getId());
                 int hp = selectedCar.getHp();
                 intToText(hpTextField, hp);
@@ -282,7 +284,7 @@ public class Main extends Application {
         saveButton.setOnAction(event -> {
             if(areEmpty(idTextField, hpTextField, modelTextField, brandTextField)) {
                 showError("isEmpty", errorColor);
-            }else if(selectedIndex == -1){
+            }else if(selectedCarIndex == -1){
                 showError("noCar", errorColor);
             }else if(!isNumber.get()) {
                 showError("noNumber", errorColor);
@@ -291,7 +293,7 @@ public class Main extends Application {
                 String brand = brandTextField.getText();
                 String model = modelTextField.getText();
                 int hp = textToInt(hpTextField);
-                Car carAtIndex = listView.getItems().get(selectedIndex);
+                Car carAtIndex = carListView.getItems().get(selectedCarIndex);
                 if (idExists(id) && (!Objects.equals(carAtIndex.getId(), id))) {
                     showError("idExist", errorColor);
                 } else {
@@ -301,24 +303,24 @@ public class Main extends Application {
                     carAtIndex.setModel(model);
                     errorLabel.setTextFill(Color.GREEN);
                     errorLabel.setText("loaded car got saved".toUpperCase());
-                    listView.refresh();
+                    carListView.refresh();
                 }
             }
         });
         showButton.setOnAction(event-> {
-            listView.setItems(items);
-            listView.setPadding(paddingList);
+            carListView.setItems(items);
+            carListView.setPadding(paddingList);
             errorLabel.setText("");
             clearFields(idTextField, brandTextField, modelTextField, hpTextField);
         });
         deleteButton.setOnAction(event -> {
-            int selectedIndex = listView.getSelectionModel().getSelectedIndex();
-            if(listView.getSelectionModel().getSelectedItem() == null) {
+            int selectedCarIndex = carListView.getSelectionModel().getSelectedIndex();
+            if(carListView.getSelectionModel().getSelectedItem() == null) {
                 showError("noCar", errorColor);
             }else {
-                if (selectedIndex >= 0) {
-                    carList.remove(selectedIndex);
-                    listView.getItems().remove(selectedIndex);
+                if (selectedCarIndex >= 0) {
+                    carList.remove(selectedCarIndex);
+                    carListView.getItems().remove(selectedCarIndex);
                     errorLabel.setTextFill(Color.GREEN);
                     errorLabel.setText("car removed".toUpperCase());
                 }
