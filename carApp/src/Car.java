@@ -1,5 +1,3 @@
-// Sven Mayer - ITMO2202
-
 public class Car {
     private String brand, model;
     private Integer id, hp;
