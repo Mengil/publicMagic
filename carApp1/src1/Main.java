@@ -1,5 +1,3 @@
-// Sven Mayer - ITMO2202
-
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
