@@ -1,7 +1,3 @@
-//=============================
-// car management application
-//=============================
-
 // Import necessary JavaFX libraries
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -21,16 +17,18 @@ import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
-
 /**
- * Accepts the following car data from user input: (ID, Make, Model, HP).
+ * The carApp program provides a GUI that accepts the following car data from the user input: ID, Make, Model, HP.
  * Stores the data and provides the ability to edit, delete and view the stored cars as a list.
- * Regular expression specifies the ID and HP TextField input.
-*/
+ * The Main class inherits the Application class to provide the functionality to launch and control a JavaFX application.
+ * @author <a href="https://github.com/Mengil">Mengil's magic</a>
+ * @version 1.0.0 - beta
+ * @since 2023-06-09
+ */
 public class Main extends Application {
     /**
-     * Main class inherits the Application class to get
-     * the functionality to start and control an JavaFX application
+     * Regular expression specifies the input from the ID and HP TextFields.
+     * ObservableList allows listeners to track changes when they occur.
      */
     private ArrayList<Car> carList;
     private ListView<Car> carListView;
@@ -48,47 +46,41 @@ public class Main extends Application {
         launch(args);
     }
     /**
-     * GraphicalUserInterface(GUI) entry point
-     * The "start" method from the Application class gets overridden to provide custom implementation in a safe way.
+     * GUI entry point
+     * The "start" method of the Application class is overridden to allow custom implementation in a safe way.
      * @param primaryStage window to display the GUI.
      */
     @Override
     public void start(Stage primaryStage) {
-
-
-    //----- style stuff -----//
-        //  dropShadow default
-        DropShadow dropShadow = createDropShadow(1, 1, 3, Color.web("#303030"));
-        //  dropShadowEnter
-        DropShadow dropShadowEnter = createDropShadow(3, 3, 12, Color.web("#303030"));
-        //  dropShadowClick
-        DropShadow dropShadowClick = createDropShadow(0, 0, 3, Color.GRAY);
-        //  fonts
+        /** general style stuff */
+        DropShadow buttonDropShadow = createButtonDropShadow(1, 1, 3, Color.web("#303030"));
+        DropShadow buttonDropShadowEnter = createButtonDropShadow(3, 3, 12, Color.web("#303030"));
+        DropShadow buttonDropShadowClick = createButtonDropShadow(0, 0, 3, Color.GRAY);
         Font helv13 = new Font("Helvetica", 13);
         Font helv15 = new Font("Helvetica", 15);
         Font helv26 = new Font("Helvetica", 26);
         Font gara15 = new Font("Garamond", 15);
-        //  paddings
         Insets paddingList = new Insets(6, 5, 6, 5);
         Insets paddingButton = new Insets(6, 11, 6, 11);
         Insets paddingBox = new Insets(7, 0, 8, 13);
         Insets paddingBox2 = new Insets(7, 13, 8, 13);
         Insets paddingHeader = new Insets(17, 0, 18, 34);
-        //  colors
         Color errorColor = Color.rgb(187, 38, 73);
         Color light = Color.rgb(255, 170, 30);      //#FFAA1E
         Color dark =  Color.rgb(48, 48, 48);
-        //  backgrounds
         Background elementBg = new Background(new BackgroundFill(dark, CornerRadii.EMPTY, Insets.EMPTY));
-        //  borders
         Border errorBorder = new Border(new BorderStroke(Color.web("#303030"), BorderStrokeStyle.SOLID, null, new BorderWidths(1, 0, 1, 0)));
-        //  car arrayList for all cars
         carList = new ArrayList<>();
-
-    //----- window content -----//
-    // [wrapperBox]
+        /** 
+         * VBox that wraps all other GUI elements and divides the GUI into two main horizontal parts.
+         * First horizontal part contains the header indicating what the program is for: auto management.
+         * Second horizontal part contains the bodyBox, which contains a VBox that divides the bodyBox into two vertical parts.
+         */
         VBox wrapperBox = new VBox();
-            // [wrapperBox wrapperHeaderLabel]
+            /**
+             * The header is traversable to maintain focus in response to user input 
+             * to prevent one of the text boxes from retaining focus.
+             */
             Label wrapperHeaderLabel = new Label(("Car  Management").toUpperCase());
             wrapperHeaderLabel.setPrefWidth(Double.MAX_VALUE);
             wrapperHeaderLabel.setPadding(paddingHeader);
@@ -98,23 +90,26 @@ public class Main extends Application {
             wrapperHeaderLabel.setTextFill(light);
             wrapperHeaderLabel.setFocusTraversable(true);
             wrapperHeaderLabel.requestFocus();
-            // [wrapperBox bodyBox]
+            /**
+             * The wrapperBox enlarges the bodyBox to fill the available vertical space.
+            */
             HBox bodyBox = new HBox();
             VBox.setVgrow(bodyBox, Priority.ALWAYS);
-                // [wrapperBox]->[bodyBox menuBox]
+                /**
+                 * The menuBox contains the Buttons to add, load, save, delete and view cars.
+                 * EventHandling to react when the user moves the mouse over a button, clicks on it or when the mouse leaves the button.
+                */
                 VBox menuBox = new VBox();
                 menuBox.setPadding(paddingBox);
                 menuBox.setSpacing(13);
                 menuBox.setPrefHeight(35);
                 menuBox.setPrefWidth(103);
                 menuBox.setAlignment(Pos.CENTER);
-                    //  [wrapperBox]->[bodyBox]->[menuBox Buttons]
                     Button addButton = new Button("add car".toUpperCase());
                     Button loadButton = new Button("load car".toUpperCase());
                     Button saveButton = new Button("save car".toUpperCase());
                     Button deleteButton = new Button("del car".toUpperCase());
                     Button showButton = new Button("show cars".toUpperCase());
-                        //  [wrapperBox]->[bodyBox]->[menuBox buttonArray]
                         Button[] buttonArray = { addButton, deleteButton, loadButton, saveButton, showButton };
                         for (Button button : buttonArray) {
                             button.setFont(helv13);
@@ -123,20 +118,20 @@ public class Main extends Application {
                             button.setMinWidth(menuBox.getPrefWidth());
                             button.setStyle("-fx-background-color: #303030;");
                             button.setTextFill(Color.WHITE);
-                            button.setEffect(dropShadow);
+                            button.setEffect(buttonDropShadow);
                             button.setOnMouseEntered(mouseEvent -> {
                                 button.setStyle("-fx-background-color: #FFFFFF; -fx-text-fill: #303030; ");
-                                button.setEffect(dropShadowEnter);
+                                button.setEffect(buttonDropShadowEnter);
                             });
                             button.setOnMouseExited(mouseEvent -> {
                                 button.setStyle("-fx-background-color: #303030; -fx-text-fill: #FFFFFF; ");
                                 button.setFont(helv13);
-                                button.setEffect(dropShadow);
+                                button.setEffect(buttonDropShadow);
                                 button.setTranslateY(0);
                             });
                             button.setOnMouseClicked(mouseEvent -> {
                                 button.setStyle("-fx-background-color: #FFAA1E; -fx-text-fill: #000000;");
-                                button.setEffect(dropShadowClick);
+                                button.setEffect(buttonDropShadowClick);
                                 button.setTranslateY(1);
                             });
                         }
@@ -372,13 +367,13 @@ public class Main extends Application {
         return idExists;
     }
 //----- [dropShadow] method
-    public static DropShadow createDropShadow(double offsetX, double offsetY, double radius, Color color) {
-        DropShadow dropShadow = new DropShadow();
-        dropShadow.setColor(color);
-        dropShadow.setOffsetX(offsetX);
-        dropShadow.setOffsetY(offsetY);
-        dropShadow.setRadius(radius);
-        return dropShadow;
+    public static DropShadow createButtonDropShadow(double offsetX, double offsetY, double radius, Color color) {
+        DropShadow buttonDropShadow = new DropShadow();
+        buttonDropShadow.setColor(color);
+        buttonDropShadow.setOffsetX(offsetX);
+        buttonDropShadow.setOffsetY(offsetY);
+        buttonDropShadow.setRadius(radius);
+        return buttonDropShadow;
     }
 //----- [areEmpty] method
     public boolean areEmpty(TextField field1, TextField field2, TextField field3, TextField field4) {
