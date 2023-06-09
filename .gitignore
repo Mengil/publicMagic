@@ -2,8 +2,9 @@
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
-C:\Users\Administrator\github\carApp\.idea
-C:\Users\Administrator\github\carApp\carApp.iml
+C:\Users\Administrator\github\publicMagic\carApp\.idea
+C:\Users\Administrator\github\publicMagic\carApp\carApp.iml
+C:\Users\Administrator\github\publicMagic\publicMagic.iml
 carApp/.idea/vcs.xml
 
 ### Eclipse ###
