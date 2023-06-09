@@ -21,10 +21,10 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * The carApp program provides a GUI that accepts the following car data from the user input: ID, Make, Model, HP.
  * Stores the data and provides the ability to edit, delete and view the stored cars as a list.
  * The Main class inherits the Application class to provide the functionality to launch and control a JavaFX application.
- * @author https://github.com/Mengil
+ * @author <a href="https://github.com/Mengil">Mengil's magic</a>
  * @version 1.0.0 - beta
  * @since 2023-06-09
-*/
+ */
 public class Main extends Application {
     /**
      * Regular expression specifies the input from the ID and HP TextFields.
@@ -53,9 +53,9 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         /** general style stuff */
-        DropShadow buttonDropShadow = createDropButtonShadow(1, 1, 3, Color.web("#303030"));
-        DropShadow buttonDropShadowEnter = createDropButtonShadow(3, 3, 12, Color.web("#303030"));
-        DropShadow buttonDropShadowClick = createDropButtonShadow(0, 0, 3, Color.GRAY);
+        DropShadow buttonDropShadow = createButtonDropShadow(1, 1, 3, Color.web("#303030"));
+        DropShadow buttonDropShadowEnter = createButtonDropShadow(3, 3, 12, Color.web("#303030"));
+        DropShadow buttonDropShadowClick = createButtonDropShadow(0, 0, 3, Color.GRAY);
         Font helv13 = new Font("Helvetica", 13);
         Font helv15 = new Font("Helvetica", 15);
         Font helv26 = new Font("Helvetica", 26);
