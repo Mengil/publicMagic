@@ -53,9 +53,9 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         /** general style stuff */
-        DropShadow buttonDropShadow = createButtonDropShadow(1, 1, 3, Color.web("#303030"));
-        DropShadow buttonDropShadowEnter = createButtonDropShadow(3, 3, 12, Color.web("#303030"));
-        DropShadow buttonDropShadowClick = createButtonDropShadow(0, 0, 3, Color.GRAY);
+        DropShadow buttonDropShadow = createDropButtonShadow(1, 1, 3, Color.web("#303030"));
+        DropShadow buttonDropShadowEnter = createDropButtonShadow(3, 3, 12, Color.web("#303030"));
+        DropShadow buttonDropShadowClick = createDropButtonShadow(0, 0, 3, Color.GRAY);
         Font helv13 = new Font("Helvetica", 13);
         Font helv15 = new Font("Helvetica", 15);
         Font helv26 = new Font("Helvetica", 26);
