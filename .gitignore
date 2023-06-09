@@ -31,3 +31,8 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+*.xml
+*.xml
+carApp/.idea/modules.xml
+carApp/carApp.iml
+publicMagic.iml
