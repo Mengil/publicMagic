@@ -5,9 +5,12 @@ out/
 
 publicMagic/publicMagic.iml
 publicMagic/.idea
-publicMagic/carApp/.idea
-publicMagic/carApp/carApp.iml
-publicMagic/carApp/.idea/vcs.xml
+publicMagic/oop_project_pcShop_MayerSven/.idea
+publicMagic/oop_project_pcShop_MayerSven/oop_project_pcShop_MayerSven.iml
+publicMagic/oop_project_pcShop_MayerSven/.idea/vcs.xml
+oop_project_pcShop_MayerSven/.idea
+oop_project_pcShop_MayerSven/oop_project_pcShop_MayerSven.iml
+oop_project_pcShop_MayerSven/.idea/vcs.xml
 
 ### Eclipse ###
 .apt_generated
@@ -33,9 +36,3 @@ bin/
 
 ### Mac OS ###
 .DS_Store
-*.xml
-*.xml
-carApp/.idea/modules.xml
-carApp/carApp.iml
-publicMagic.iml
-oop_project_pcShop_MayerSven/oop_project_pcShop_MayerSven.iml
