@@ -20,3 +20,10 @@
 //public static void mausMenu(ArrayList<String> productPropertyList){
 //        MenuBuilder.menuBuilder("Maus anlegen", "Eigenschaften", productPropertyList, standardMenuPrompt);
 //        }
+
+
+//          System.out.println("Alle Eigenschaften des Motherboards sind vorhanden und haben gültige Werte.");
+//                  mausArrayList.add(maus);
+//                  for (Maus element : mausArrayList) {
+//                  element.getMaus();
+//                  }
