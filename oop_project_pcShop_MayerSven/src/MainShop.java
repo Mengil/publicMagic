@@ -19,9 +19,24 @@ public class MainShop {
         monitorArrayList = new ArrayList<>();
         motherboardArrayList = new ArrayList<>();
         tastaturArrayList = new ArrayList<>();
-        addDummyData("Maus", 1, 10);
 
+        dummyData();
         hauptMenue();
+    }
+    public static void dummyData(){
+        Maus maus = new Maus("Corsair", "Gaming M65 RGB Ultra", 49.90, 26000);
+        mausArrayList.add(maus);
+        Monitor monitor = new Monitor("Philips", "Gaming-Monitor E-line 272E1GAJ", 138.99, 27.03);
+        monitorArrayList.add(monitor);
+        Motherboard motherboard = new Motherboard("Supermicro", "X11SSV-Q bulk", 301.95, "Intel 1151");
+        motherboardArrayList.add(motherboard);
+        Tastatur tastatur = new Tastatur("Asus", "90MP0316-BKDA01", 298.89,"mechanisch");
+        tastaturArrayList.add(tastatur);
+        Tastatur tastatur2 = new Tastatur("Sharkoon", "Skiller SGK5", 33.90,"Rubber Dome");
+        tastaturArrayList.add(tastatur2);
+        addDummyData("Maus", 1, 1);
+        addDummyData("Monitor", 1, 1);
+        addDummyData("Motherboard", 1, 1);
     }
     public static void addDummyData(String productCategory, Integer productMin, Integer productMax){
         switch(productCategory){
@@ -35,8 +50,26 @@ public class MainShop {
                     mausArrayList.add(maus);
                 }
             }
-//            case "Monitor" ->;
-//            case "Motherboard" ->;
+            case "Monitor" -> {
+                for (int i = productMin; i <= productMax; i++){
+                    String productBrand = productCategory + "Marke" + i;
+                    String productModel = productCategory + "Modell" + i;
+                    Double productPrice = (double) i;
+                    Double screenSizeInch = (double) (i+i);
+                    Monitor monitor = new Monitor(productBrand, productModel, productPrice, screenSizeInch);
+                    monitorArrayList.add(monitor);
+                }
+            }
+            case "Motherboard" -> {
+                for (int i = productMin; i <= productMax; i++) {
+                    String productBrand = productCategory + "Marke" + i;
+                    String productModel = productCategory + "Modell" + i;
+                    Double productPrice = (double) i;
+                    String socket = "socket" + i;
+                    Motherboard motherboard = new Motherboard(productBrand, productModel, productPrice, socket);
+                    motherboardArrayList.add(motherboard);
+                }
+            }
 //            case "Tastatur" ->;
         }
     }
@@ -63,9 +96,9 @@ public class MainShop {
                 }
                 case "3", "3)" -> productPriceInput(maus);
                 case "4", "4)" -> {
-                    System.out.println("Gebe die Sensorauflösung an:");
-                    String sensorAufloesung = menuScanner.next();
-                    sensorAufloesung = sensorAufloesung.replace(",", "");
+                    System.out.println("Gebe die Sensorauflösung (in dpi) an:");
+                    String sensorAufloesung = menuScanner.next().toLowerCase();
+                    sensorAufloesung = sensorAufloesung.replace(",", "").replace("dpi", "");
                     try {
                         Integer aufloesung = Integer.valueOf(sensorAufloesung);
                         maus.setSensorAufloesung(aufloesung);
@@ -79,8 +112,8 @@ public class MainShop {
                     } else {
                         System.out.println("Alle Eigenschaften der Maus sind vorhanden und haben gültige Werte.");
                         mausArrayList.add(maus);
+                        addAnotherProductCheck();
                     }
-                    addAnotherProductCheck();
                     return;
                 }
                 default -> wrongInputQuit("wrongInput");
@@ -120,8 +153,8 @@ public class MainShop {
                     } else {
                         System.out.println("Alle Eigenschaften der Tastatur sind vorhanden und haben gültige Werte.");
                         tastaturArrayList.add(tastatur);
+                        addAnotherProductCheck();
                     }
-                    addAnotherProductCheck();
                     return;
                 }default -> wrongInputQuit("wrongInput");
             }
@@ -160,8 +193,8 @@ public class MainShop {
                     } else {
                         System.out.println("Alle Eigenschaften des Motherboards sind vorhanden und haben gültige Werte.");
                         motherboardArrayList.add(motherboard);
+                        addAnotherProductCheck();
                     }
-                    addAnotherProductCheck();
                     return;
                 }default -> wrongInputQuit("wrongInput");
             }
@@ -202,49 +235,84 @@ public class MainShop {
                     } else {
                         System.out.println("Alle Eigenschaften des Monitors sind vorhanden und haben gültige Werte.");
                         monitorArrayList.add(monitor);
+                        addAnotherProductCheck();
                     }
-                    addAnotherProductCheck();
                     return;
                 }default -> wrongInputQuit("wrongInput");
             }
         }
     }
-    public static void productArrayListAusgeben(ArrayList<? extends Product> productArrayList, String title, String productCategory) {
-        System.out.println(title + " Eigenschaften:");
-        for (Object product : productArrayList) {
-            System.out.println(product.getProductCategory());
-        }
-        System.out.println("-------------------------");
-    }
+
     private static void produktBearbeiten(){
-        productArrayListAusgeben(mausArrayList, "Mäuse |", "Maus");
-        productArrayListAusgeben(monitorArrayList, "Monitore |", "Monitor");
-        productArrayListAusgeben(motherboardArrayList, "Motherboards |", "Motherboard");
-        productArrayListAusgeben(tastaturArrayList, "Tastaturen |", "Tastatur");
+        if(mausArrayList.isEmpty() && monitorArrayList.isEmpty() && motherboardArrayList.isEmpty() && tastaturArrayList.isEmpty()){
+            wrongInputQuit("productsNotExist");
+        }else{
+            int productCount = 0;
+            if (!mausArrayList.isEmpty()) {
+                System.out.println("[Produkte der Kategorie Mäuse]");
+                for (Maus maus : mausArrayList) {
+                    productCount++;
+                    System.out.print("\t" + productCount + ") ");
+                    maus.getMaus();
+                }
+            }
+            if (!monitorArrayList.isEmpty()) {
+                System.out.println("[Produkte der Kategorie Monitore]");
+                for (Monitor monitor : monitorArrayList) {
+                    productCount++;
+                    System.out.print("\t" + productCount + ") ");
+                    monitor.getMonitor();
+                }
+            }
+            if (!motherboardArrayList.isEmpty()) {
+                System.out.println("[Produkte der Kategorie Motherboards]");
+                for (Motherboard motherboard : motherboardArrayList) {
+                    productCount++;
+                    System.out.print("\t" + productCount + ") ");
+                    motherboard.getMotherboard();
+                }
+            }
+            if (!tastaturArrayList.isEmpty()) {
+                System.out.println("[Produkte der Kategorie Tastaturen]");
+                for (Tastatur tastatur : tastaturArrayList) {
+                    productCount++;
+                    System.out.print("\t" + productCount + ") ");
+                    tastatur.getTastatur();
+                }
+            }
+            System.out.println("Tippe die Nummer eines Produkts ein, um dieses zu bearbeiten:");
+            int productEditInput = menuScanner.nextInt();
 
-//        for (Maus maus : mausArrayList) {
-//            maus.getMaus();
-//        }
-//        for (Monitor monitor : monitorArrayList) {
-//            monitor.getMonitor();
-//        }
-//        for (Motherboard motherboard : motherboardArrayList) {
-//            motherboard.getMotherboard();
-//        }
-//        for (Tastatur tastatur : tastaturArrayList) {
-//            tastatur.getTastatur();
-//        }
-
-//        Im Menüpunkt „Produkt bearbeiten“ sollen alle gespeicherten Produkte durchnummeriert angezeigt
-//        werden. Ist kein Produkt vorhanden, soll die Info „Keine Produkte vorhanden“ angezeigt werden
-//        und das Hauptmenü wieder aufgerufen werden. Nach der Auswahl des zu bearbeitenden Produkts
+            if (productEditInput >= 1 && productEditInput <= productCount) {
+                if (productEditInput <= mausArrayList.size()) {
+                    Maus selectedMaus = mausArrayList.get(productEditInput - 1);
+                    selectedMaus.getMaus();
+                } else if (productEditInput <= mausArrayList.size() + monitorArrayList.size()) {
+                    Monitor selectedMonitor = monitorArrayList.get(productEditInput - mausArrayList.size() - 1);
+                    selectedMonitor.getMonitor();
+                } else if (productEditInput <= mausArrayList.size() + monitorArrayList.size() + motherboardArrayList.size()) {
+                    Motherboard selectedMotherboard = motherboardArrayList.get(productEditInput - mausArrayList.size() - monitorArrayList.size() - 1);
+                    selectedMotherboard.getMotherboard();
+                } else {
+                    Tastatur selectedTastatur = tastaturArrayList.get(productEditInput - mausArrayList.size() - monitorArrayList.size() - motherboardArrayList.size() - 1);
+                    selectedTastatur.getTastatur();
+                }
+            } else {
+                System.out.println("Ungültige Eingabe. Bitte eine gültige Nummer eingeben.");
+            }
+        }
+    }
 //        sollen die Eigenschaften neu eingegeben werden und das ausgewählte Produkt aktualisiert werden.
 //        Sollte eine Eigenschaft fehlen/leer sein, darf das Produkt nicht abgespeichert werden und die Info
 //„Produkt konnte aufgrund leerer Eingabewerte nicht gespeichert werden“ soll angezeigt werden.
 //                Anschließend soll das Hauptmenü wieder aufgerufen werden. Wurde das Produkt korrekt
 //        aktualisiert und gespeichert, soll abgefragt werden, ob man nochmal ein Produkt bearbeiten möchte
 //        oder nicht. Wenn ja, Bearbeiten erneut aufrufen und bei nein geht es zurück zum Hauptmenü.
-    }
+
+
+
+
+
     private static void produktAnlegen(){
         ArrayList<String> productCreateMenuItemArrayList = new ArrayList<>(Arrays.asList("Monitor", "Motherboard", "Tastatur", "Maus"));
         MenuBuilder.menuBuilder("Produkt anlegen", "Produktkategorien", productCreateMenuItemArrayList, standardMenuPrompt);
@@ -271,8 +339,8 @@ public class MainShop {
         }
     }
     private static void productPriceInput(Product product){
-        System.out.println("Gebe den Preis an:");
-        String productPrice = menuScanner.next().replace(",", ".");
+        System.out.println("Gebe den Preis(in €) an:");
+        String productPrice = menuScanner.next().replace(",", ".").replace("€", "");
         try { product.setProductPrice(Double.valueOf(productPrice));
         } catch (NumberFormatException e) {
             wrongInputQuit("wrongInput");
@@ -320,6 +388,7 @@ public class MainShop {
         switch(errorType){
             case "wrongInput" -> errorMessage = "Info: Fehlerhafte Eingabe";
             case "emptyValue" -> errorMessage = "Produkt konnte aufgrund leerer Eingabewerte nicht gespeichert werden";
+            case "productsNotExist" -> errorMessage = "Keine Produkte vorhanden";
         }
         System.out.println("\n------------------------------------------------\n" + errorMessage + "\n------------------------------------------------");
         hauptMenue();

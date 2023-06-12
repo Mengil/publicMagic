@@ -11,12 +11,11 @@ public class Tastatur extends Product {
     public String getTastenTyp() {
         return tastenTyp;
     }
-
     public void setTastenTyp(String tastenTyp) {
         this.tastenTyp = tastenTyp;
     }
 
     public void getTastatur(){
-        System.out.println("Tastatur: " + "[Marke] " + getProductBrand() + " [Modell] " + '"' + getProductModel() + '"' + " [Preis] " + '"' + getProductPrice() + '"' + " [Tastentyp] " + tastenTyp);
+        classOutputFormatter(getProductPrice(), getTastenTyp());
     }
 }

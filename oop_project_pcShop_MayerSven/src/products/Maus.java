@@ -11,12 +11,12 @@ public class Maus extends Product {
     public Integer getSensorAufloesung() {
         return sensorAufloesung;
     }
-
     public void setSensorAufloesung(Integer sensorAufloesung) {
         this.sensorAufloesung = sensorAufloesung;
     }
 
-    public void getMaus(){
-        System.out.println("Maus: " + "[Marke] " + getProductBrand() + " [Modell] " + '"' + getProductModel() + '"' + " [Preis] " + '"' + getProductPrice() + '"' + " [Sensorauflösung] " + sensorAufloesung + " dpi");
+    public void getMaus() {
+        classOutputFormatter(getProductPrice(), String.valueOf(getSensorAufloesung()));
     }
+
 }

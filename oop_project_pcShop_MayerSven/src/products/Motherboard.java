@@ -10,12 +10,11 @@ public class Motherboard extends Product {
     public String getMotherboardSocket() {
         return motherboardSocket;
     }
-
     public void setMotherboardSocket(String MotherboardSocket) {
         this.motherboardSocket = MotherboardSocket;
     }
 
     public void getMotherboard(){
-        System.out.println("Motherboard: " + "[Marke] " + getProductBrand() + " [Modell] " + '"' + getProductModel() + '"' + " [Preis] " + '"' + getProductPrice() + '"' + " [Sockel] " + motherboardSocket);
+        classOutputFormatter(getProductPrice(), getMotherboardSocket());
     }
 }
