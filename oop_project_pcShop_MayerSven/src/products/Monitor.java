@@ -16,6 +16,6 @@ public class Monitor extends Product {
     }
 
     public void getMonitor(){
-        classOutputFormatter(getProductPrice(), String.valueOf(getScreenSizeInch()));
+        classOutputFormatter(getProductPrice(), String.valueOf(getScreenSizeInch()), "Monitor");
     }
 }

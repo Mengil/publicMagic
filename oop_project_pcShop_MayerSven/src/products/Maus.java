@@ -1,22 +1,22 @@
 package products;
 
 public class Maus extends Product {
-    private Integer sensorAufloesung;
+    private Integer sensorResolution;
 
-    public Maus(String productBrand, String productModel, Double productPrice, Integer sensorAufloesung){
+    public Maus(String productBrand, String productModel, Double productPrice, Integer sensorResolution){
         super(productBrand, productModel, productPrice);
-        this.sensorAufloesung = sensorAufloesung;
+        this.sensorResolution = sensorResolution;
     }
 
-    public Integer getSensorAufloesung() {
-        return sensorAufloesung;
+    public Integer getSensorResolution() {
+        return sensorResolution;
     }
-    public void setSensorAufloesung(Integer sensorAufloesung) {
-        this.sensorAufloesung = sensorAufloesung;
+    public void setSensorResolution(Integer sensorResolution) {
+        this.sensorResolution = sensorResolution;
     }
 
     public void getMaus() {
-        classOutputFormatter(getProductPrice(), String.valueOf(getSensorAufloesung()));
+        classOutputFormatter(getProductPrice(), String.valueOf(getSensorResolution()), "Maus");
     }
 
 }

@@ -15,6 +15,6 @@ public class Motherboard extends Product {
     }
 
     public void getMotherboard(){
-        classOutputFormatter(getProductPrice(), getMotherboardSocket());
+        classOutputFormatter(getProductPrice(), getMotherboardSocket(), "Motherboard");
     }
 }

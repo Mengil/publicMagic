@@ -10,10 +10,15 @@ public class Product {
         this.productModel = productModel;
         this.productPrice = productPrice;
     }
-    public void classOutputFormatter(double number, String uniqueProperty) {
+    public void classOutputFormatter(double number, String uniqueProperty, String productName) {
         DecimalFormat newNumberFormat = new DecimalFormat("0.##");
-        String formattedPrice = newNumberFormat.format(number);
-        System.out.println(getProductBrand() + " - " + getProductModel() + " - " + formattedPrice + "€ - " + uniqueProperty);
+        String formattedNumber = newNumberFormat.format(number);
+        switch (productName) {
+            case "Maus" -> System.out.println(getProductBrand() + " - " + getProductModel() + " - " + formattedNumber + "€ - " + uniqueProperty + "dpi");
+            case "Monitor" -> System.out.println(getProductBrand() + " - " + getProductModel() + " - " + formattedNumber + "€ - " + uniqueProperty + " Zoll");
+            case "Motherboard" -> System.out.println(getProductBrand() + " - " + getProductModel() + " - " + formattedNumber + "€ - " + "Sockel " + uniqueProperty);
+            case "Tastatur" -> System.out.println(getProductBrand() + " - " + getProductModel() + " - " + formattedNumber + "€ - " + "Typ " + uniqueProperty);
+        }
     }
 
     public String getProductBrand() {return productBrand;}
