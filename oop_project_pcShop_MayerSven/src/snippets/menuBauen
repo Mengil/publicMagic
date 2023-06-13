@@ -21,17 +21,24 @@ private static void propertyMenu(String menuTitle, String menuHeader, ArrayList<
       productCategory.setProductModel(productModel);
     }
     case "3", "3)" -> productPriceInput(productCategory);
+    
+    
     case "4", "4)" -> {
+    //hier filtern, welche Produktkategorie mit productCategory übergeben wurde
+    
       System.out.println("Gebe " + uniqueProperty + " an:");
       String uniquePropertyInput = menuScanner.next().toLowerCase();
       uniquePropertyInput = uniquePropertyInput.replace(",", "").replace("dpi", "");
       try {
-        Integer aufloesung = Integer.valueOf(uniquePropertyInput);
+        Integer uniqueProperty = Integer.valueOf(uniquePropertyInput);
         productCategory.setSensorAufloesung(aufloesung);
       } catch (NumberFormatException e) {
         wrongInputQuit("wrongInput");
       }
     }
+    
+    
+    
     case "0", "0)" -> {
       if (productCategory.getProductBrand().isEmpty() || productCategory.getProductModel().isEmpty() || productCategory.getProductPrice() == 0.0 || productCategory.getSensorAufloesung() == 0) {
         wrongInputQuit("emptyValue");
