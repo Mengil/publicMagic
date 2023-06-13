@@ -82,6 +82,9 @@ private static void arrayListOutput(ArrayList<?> productArrayList, String produc
                }
                }
 
-
-
  */
+
+
+
+
+

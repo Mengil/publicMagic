@@ -1,10 +1,8 @@
-package workStuff;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class PropertyHandler {
+public class PropertiesHandler {
     public static void propertyArrayListHandler(ArrayList<String> propertyArrayList, String menuName, String productCategory){
         String[] propertiesToRemove = {"Größe(Zoll)", "Monitor Speichern", "Sockel", "Motherboard Speichern", "Tastentyp", "Tastatur Speichern", "Auflösung(dpi)", "Maus Speichern"};
 
