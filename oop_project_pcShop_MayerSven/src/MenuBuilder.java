@@ -3,9 +3,9 @@ import java.util.ArrayList;
 public class MenuBuilder {
     public static void menuBuilder(String menuTitle, String menuHeader, ArrayList<String> menuItems, String menuPrompt){
         System.out.println(
-                "------------------------------------------------ \n" +
-                        "PC-Shop" + "\t\t\t" + menuTitle + "\t\t" + "von: " + "Sven Mayer" +
-                        "\n------------------------------------------------");
+                "-------------------------------------------------------\n" +
+                        "PC-Shop" + "\t\t\t\t" + menuTitle + "\t\t" + "von: " + "Sven Mayer" +
+                        "\n-------------------------------------------------------");
         if(!menuHeader.isEmpty()){
             System.out.println(menuHeader);
         }

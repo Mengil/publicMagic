@@ -1,4 +1,7 @@
 import products.*;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -20,7 +23,7 @@ public class MainShop {
         motherboardArrayList = new ArrayList<>();
         tastaturArrayList = new ArrayList<>();
 
-        dummyData();
+//        dummyData();
         hauptMenue();
     }
     public static void dummyData(){
@@ -242,44 +245,31 @@ public class MainShop {
             }
         }
     }
-
+    private static Integer arrayListOutput(ArrayList<?> productArrayList, Integer productCount, String productPluralCategory, String productClassName) {
+        if (!productArrayList.isEmpty()) {
+            System.out.println("[Produkte der Kategorie " + productPluralCategory + "]");
+            for (Object product : productArrayList) {
+                productCount++;
+                System.out.print("\t" + productCount + ") ");
+                try {
+                    Method getMethod = product.getClass().getMethod("get" + productClassName);
+                    getMethod.invoke(product);
+                } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return productCount;
+    }
     private static void produktBearbeiten(){
         if(mausArrayList.isEmpty() && monitorArrayList.isEmpty() && motherboardArrayList.isEmpty() && tastaturArrayList.isEmpty()){
             wrongInputQuit("productsNotExist");
         }else{
             int productCount = 0;
-            if (!mausArrayList.isEmpty()) {
-                System.out.println("[Produkte der Kategorie Mäuse]");
-                for (Maus maus : mausArrayList) {
-                    productCount++;
-                    System.out.print("\t" + productCount + ") ");
-                    maus.getMaus();
-                }
-            }
-            if (!monitorArrayList.isEmpty()) {
-                System.out.println("[Produkte der Kategorie Monitore]");
-                for (Monitor monitor : monitorArrayList) {
-                    productCount++;
-                    System.out.print("\t" + productCount + ") ");
-                    monitor.getMonitor();
-                }
-            }
-            if (!motherboardArrayList.isEmpty()) {
-                System.out.println("[Produkte der Kategorie Motherboards]");
-                for (Motherboard motherboard : motherboardArrayList) {
-                    productCount++;
-                    System.out.print("\t" + productCount + ") ");
-                    motherboard.getMotherboard();
-                }
-            }
-            if (!tastaturArrayList.isEmpty()) {
-                System.out.println("[Produkte der Kategorie Tastaturen]");
-                for (Tastatur tastatur : tastaturArrayList) {
-                    productCount++;
-                    System.out.print("\t" + productCount + ") ");
-                    tastatur.getTastatur();
-                }
-            }
+            productCount = arrayListOutput(mausArrayList, productCount, "Mäuse", "Maus");
+            productCount = arrayListOutput(monitorArrayList, productCount, "Monitore", "Monitor");
+            productCount = arrayListOutput(motherboardArrayList, productCount, "Motherboards", "Motherboard");
+            productCount = arrayListOutput(tastaturArrayList, productCount, "Tastaturen", "Tastatur");
             System.out.println("Tippe die Nummer eines Produkts ein, um dieses zu bearbeiten:");
             int productEditInput = menuScanner.nextInt();
 
@@ -308,9 +298,6 @@ public class MainShop {
 //                Anschließend soll das Hauptmenü wieder aufgerufen werden. Wurde das Produkt korrekt
 //        aktualisiert und gespeichert, soll abgefragt werden, ob man nochmal ein Produkt bearbeiten möchte
 //        oder nicht. Wenn ja, Bearbeiten erneut aufrufen und bei nein geht es zurück zum Hauptmenü.
-
-
-
 
 
     private static void produktAnlegen(){
@@ -386,11 +373,11 @@ public class MainShop {
     private static void wrongInputQuit(String errorType){
         String errorMessage = null;
         switch(errorType){
-            case "wrongInput" -> errorMessage = "Info: Fehlerhafte Eingabe";
+            case "wrongInput" -> errorMessage = "\t\t\t\t\tFehlerhafte Eingabe";
             case "emptyValue" -> errorMessage = "Produkt konnte aufgrund leerer Eingabewerte nicht gespeichert werden";
-            case "productsNotExist" -> errorMessage = "Keine Produkte vorhanden";
+            case "productsNotExist" -> errorMessage = "\t\t\t\t\tKeine Produkte vorhanden";
         }
-        System.out.println("\n------------------------------------------------\n" + errorMessage + "\n------------------------------------------------");
+        System.out.println("\n+-Info-+----------------------------------------------------------------------\n" + "| Info | " + errorMessage + "\n+-Info-+----------------------------------------------------------------------");
         hauptMenue();
     }
 
