@@ -7,7 +7,6 @@ public class Maus extends Product {
         super(productBrand, productModel, productPrice);
         this.sensorResolution = sensorResolution;
     }
-
     public Integer getSensorResolution() {
         return sensorResolution;
     }
@@ -15,9 +14,7 @@ public class Maus extends Product {
         this.sensorResolution = sensorResolution;
     }
 
-    public void getMaus() {
-        classOutputFormatter(getProductPrice(), String.valueOf(getSensorResolution()), "Maus");
-    }
+    public void getMaus() {classOutputFormatter(getProductPrice(), String.valueOf(getSensorResolution()), "Maus");}
 
     @Override
     public String toString() {

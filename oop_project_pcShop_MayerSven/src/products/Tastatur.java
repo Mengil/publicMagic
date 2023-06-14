@@ -7,7 +7,6 @@ public class Tastatur extends Product {
         super(productBrand, productModel, productPrice);
         this.keyboardType = keyboardType;
     }
-
     public String getKeyboardType() {
         return keyboardType;
     }

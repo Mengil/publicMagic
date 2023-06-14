@@ -7,7 +7,6 @@ public class Monitor extends Product {
         super(productBrand, productModel, productPrice);
         this.screenSizeInch = sizeInch;
     }
-
     public Double getScreenSizeInch() {
         return screenSizeInch;
     }

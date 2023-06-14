@@ -21,15 +21,89 @@ public class MainShop {
         hauptMenue();
     }
 
-//    Das Löschen soll mit der Methode produktLoeschen() durchgeführt werden.
-//    Im Menüpunkt „Produkt löschen“ sollen alle gespeicherten Produkt durchnummeriert angezeigt
-//    werden. Bei falscher Eingabe soll eine Info „Fehlerhafte Eingabe“ angezeigt werden und das
-//    Hauptmenü wieder angezeigt werden. Nach richtiger Auswahl soll eine Abfrage angezeigt werden,
-//    ob wirklich gelöscht werden soll. Wenn ja, lösche das Produkt, wenn nein, soll das Hauptmenü
-//    wieder angezeigt werden.
+private static Integer addEditDeleteProductListsOutput(Integer productCount, String activity){
+    System.out.println(
+            """
+                    -------------------------------------------------------
+                    PC-Shop\t\t\tProduktliste\t\t\tvon: Sven Mayer
+                    -------------------------------------------------------""");
 
+    productCount = productsOutputToConsole(mausArrayList, productCount, "Mäuse", "Maus");
+    productCount = productsOutputToConsole(monitorArrayList, productCount, "Monitore", "Monitor");
+    productCount = productsOutputToConsole(motherboardArrayList, productCount, "Motherboards", "Motherboard");
+    productCount = productsOutputToConsole(tastaturArrayList, productCount, "Tastaturen", "Tastatur");
+    System.out.println("-------------------------------------------------------\nTippe die Nummer eines Produkts ein, um dieses zu " + activity + ":");
+    return productCount;
+}
+    public static void produktLoeschen() {
+        int productCount = 0;
+        productCount = addEditDeleteProductListsOutput(productCount, "löschen");
+        try {
+            int productEditInput;
+            String productEditInputString = menuScanner.next();
+            productEditInput = Integer.parseInt(productEditInputString);
 
+            if (productEditInput >= 1 && productEditInput <= productCount) {
+                if (productEditInput <= mausArrayList.size()) {
+                    Maus selectedMaus = mausArrayList.get(productEditInput - 1);
+                    System.out.println("------------------------------------------------\n" + selectedMaus +
+                        "\nSoll der Eintrag " + productEditInput +") zu [" + selectedMaus.getProductModel() + "] wirklich gelöscht werden?" +
+                            "\n(J)a    |   (N)ein");
+                    String deleteConfirmInput = menuScanner.next();
+                    switch(deleteConfirmInput){
+                        case "j", "J", "ja", "Ja" -> {
+                            mausArrayList.remove(selectedMaus);
+                            produktLoeschen();
+                        }
+                        case "n", "N", "nein", "Nein" -> hauptMenue();
+                    }
 
+                } else if (productEditInput <= mausArrayList.size() + monitorArrayList.size()) {
+                    Monitor selectedMonitor = monitorArrayList.get(productEditInput - mausArrayList.size() - 1);
+                    System.out.println("------------------------------------------------\n" + selectedMonitor +
+                            "\nSoll der Eintrag " + productEditInput +") zu [" + selectedMonitor.getProductModel() + "] wirklich gelöscht werden?" +
+                            "\n(J)a    |   (N)ein");
+                    String deleteConfirmInput = menuScanner.next();
+                    switch(deleteConfirmInput){
+                        case "j", "J", "ja", "Ja" -> {
+                            monitorArrayList.remove(selectedMonitor);
+                            produktLoeschen();
+                        }
+                        case "n", "N", "nein", "Nein" -> hauptMenue();
+                    }
+
+                } else if (productEditInput <= mausArrayList.size() + monitorArrayList.size() + motherboardArrayList.size()) {
+                    Motherboard selectedMotherboard = motherboardArrayList.get(productEditInput - mausArrayList.size() - monitorArrayList.size() - 1);
+                    System.out.println("------------------------------------------------\n" + selectedMotherboard +
+                            "\nSoll der Eintrag " + productEditInput +") zu [" + selectedMotherboard.getProductModel() + "] wirklich gelöscht werden?" +
+                            "\n(J)a    |   (N)ein");
+                    String deleteConfirmInput = menuScanner.next();
+                    switch(deleteConfirmInput){
+                        case "j", "J", "ja", "Ja" -> {
+                            motherboardArrayList.remove(selectedMotherboard);
+                            produktLoeschen();
+                        }
+                        case "n", "N", "nein", "Nein" -> hauptMenue();
+                    }
+                } else {
+                    Tastatur selectedTastatur = tastaturArrayList.get(productEditInput - mausArrayList.size() - monitorArrayList.size() - motherboardArrayList.size() - 1);
+                    System.out.println("------------------------------------------------\n" + selectedTastatur +
+                            "\nSoll der Eintrag " + productEditInput +") zu [" + selectedTastatur.getProductModel() + "] wirklich gelöscht werden?" +
+                            "\n(J)a    |   (N)ein");
+                    String deleteConfirmInput = menuScanner.next();
+                    switch(deleteConfirmInput){
+                        case "j", "J", "ja", "Ja" -> {
+                            tastaturArrayList.remove(selectedTastatur);
+                            produktLoeschen();
+                        }
+                        case "n", "N", "nein", "Nein" -> hauptMenue();
+                    }
+                }
+            }
+        } catch (NumberFormatException | InputMismatchException e) {
+            errorMessageAndQuit("wrongInput");
+        }
+    }
     public static void produktSuchen() {
             System.out.println("""
                     -------------------------------------
@@ -252,27 +326,29 @@ public class MainShop {
         }
         return productCount;
     }
-    public static void produktBearbeiten() {
+    private static void produktBearbeiten() {
         if (mausArrayList.isEmpty() && monitorArrayList.isEmpty() && motherboardArrayList.isEmpty() && tastaturArrayList.isEmpty()) {
             errorMessageAndQuit("productsNotExist");
         } else {
-            System.out.println(
-                    "-------------------------------------------------------\n" +
-                    "PC-Shop" + "\t\t\tProduktliste" + "\t\t\t" + "von: " + "Sven Mayer" +
-                    "\n-------------------------------------------------------");
             int productCount = 0;
-            productCount = productsOutputToConsole(mausArrayList, productCount, "Mäuse", "Maus");
-            productCount = productsOutputToConsole(monitorArrayList, productCount, "Monitore", "Monitor");
-            productCount = productsOutputToConsole(motherboardArrayList, productCount, "Motherboards", "Motherboard");
-            productCount = productsOutputToConsole(tastaturArrayList, productCount, "Tastaturen", "Tastatur");
-            System.out.println("-------------------------------------------------------\nTippe die Nummer eines Produkts ein, um dieses zu bearbeiten:");
+            productCount = addEditDeleteProductListsOutput(productCount, "bearbeiten");
             try {
-                int productEditInput = menuScanner.nextInt();
+                int productEditInput;
+                String productEditInputString = menuScanner.next();
+                productEditInput = Integer.parseInt(productEditInputString);
+
                 if (productEditInput >= 1 && productEditInput <= productCount) {
                     if (productEditInput <= mausArrayList.size()) {
                         Maus selectedMaus = mausArrayList.get(productEditInput - 1);
                         productMenues.propertyArrayListHandler(categoryPropertiesArrayList, "mausMenu", "Maus");
+
+
+                        // getter nötig?
                         propertiesAddOrEdit("\t\t\tMaus bearbeiten",selectedMaus.toString(), "die Sensorauflösung", selectedMaus, "bearbeiten");
+
+
+
+
                     } else if (productEditInput <= mausArrayList.size() + monitorArrayList.size()) {
                         Monitor selectedMonitor = monitorArrayList.get(productEditInput - mausArrayList.size() - 1);
                         selectedMonitor.getMonitor();
@@ -289,10 +365,9 @@ public class MainShop {
                         productMenues.propertyArrayListHandler(categoryPropertiesArrayList, "tastaturMenu", "Tastatur");
                         propertiesAddOrEdit("\t\t\tTastatur bearb.",selectedTastatur.toString(),"den Tastaturen-Typ", selectedTastatur, "bearbeiten");
                     }
-                } else {
-                    errorMessageAndQuit("wrongInput");
                 }
             } catch (NumberFormatException | InputMismatchException e) {
+                menuScanner.reset();
                 errorMessageAndQuit("wrongInput");
             }
         }
@@ -312,14 +387,18 @@ public class MainShop {
     private static void hauptMenue(){
         ArrayList<String> mainMenuItemArrayList = new ArrayList<>(Arrays.asList("Produkt anlegen", "Produkt bearbeiten", "Produkt suchen", "Produkt löschen", "Shop beenden"));
         MenuBuilder.menuBuilder("\t\t\t\tHauptmenü", "", mainMenuItemArrayList, standardMenuPrompt);
-        String mainMenuSelectInput = menuScanner.next();
-        switch (mainMenuSelectInput) {
-            case "1", "1)", "Produkt anlegen" -> produktAnlegen();
-            case "2", "2)", "Produkt bearbeiten" -> produktBearbeiten();
-            case "3", "3)","Produkt suchen" -> produktSuchen();    //produktSuchen();
-            case "4", "4)","Produkt löschen" -> MainShop.main(null);    //produktLoeschen();
-            case "0", "0)","Shop beenden" -> shopBeenden();
-            default -> errorMessageAndQuit("wrongInput");
+       String mainMenuSelectInput = menuScanner.next();
+        try {
+            switch (mainMenuSelectInput) {
+                case "1", "1)", "Produkt anlegen" -> produktAnlegen();
+                case "2", "2)", "Produkt bearbeiten" -> produktBearbeiten();
+                case "3", "3)", "Produkt suchen" -> produktSuchen();    //produktSuchen();
+                case "4", "4)", "Produkt löschen" -> produktLoeschen();    //produktLoeschen();
+                case "0", "0)", "Shop beenden" -> shopBeenden();
+                default -> errorMessageAndQuit("wrongInput");
+            }
+        }catch (NumberFormatException | InputMismatchException e){
+            errorMessageAndQuit("wrongInput");
         }
     }
     private static void addOrEditAnotherProductCheck(String addOrEdit){
@@ -382,7 +461,7 @@ public class MainShop {
             case "emptyValue" -> errorMessage = "Produkt konnte aufgrund leerer Eingabewerte nicht gespeichert werden";
             case "productsNotExist" -> errorMessage = "\t\t\t\t\tKeine Produkte vorhanden";
         }
-        System.out.println("\n+-Info-+----------------------------------------------------------------------\n" + "| Info | " + errorMessage + "\n+-Info-+----------------------------------------------------------------------");
+        System.out.println("\n+-Info-+--------------------------------------------------------------+-Info-+\n" + "| Info | " + errorMessage + "\n+-Info-+--------------------------------------------------------------+-Info-+");
         hauptMenue();
     }
 }
