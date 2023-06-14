@@ -14,10 +14,10 @@ public class Product {
         DecimalFormat newNumberFormat = new DecimalFormat("0.##");
         String formattedNumber = newNumberFormat.format(number);
         switch (productName) {
-            case "Maus" -> System.out.println(getProductBrand() + " - " + getProductModel() + " - " + formattedNumber + "€ - " + uniqueProperty + "dpi");
-            case "Monitor" -> System.out.println(getProductBrand() + " - " + getProductModel() + " - " + formattedNumber + "€ - " + uniqueProperty + " Zoll");
-            case "Motherboard" -> System.out.println(getProductBrand() + " - " + getProductModel() + " - " + formattedNumber + "€ - " + "Sockel " + uniqueProperty);
-            case "Tastatur" -> System.out.println(getProductBrand() + " - " + getProductModel() + " - " + formattedNumber + "€ - " + "Typ " + uniqueProperty);
+            case "Maus" -> System.out.println(getProductModel() + " - " + getProductBrand() + " - " + formattedNumber + "€ - " + uniqueProperty + "dpi");
+            case "Monitor" -> System.out.println(getProductModel() + " - " + getProductBrand() + " - " + formattedNumber + "€ - " + uniqueProperty + " Zoll");
+            case "Motherboard" -> System.out.println(getProductModel() + " - " + getProductBrand() + " - " + formattedNumber + "€ - " + "Sockel " + uniqueProperty);
+            case "Tastatur" -> System.out.println(getProductModel() + " - " + getProductBrand() + " - " + formattedNumber + "€ - " + "Typ " + uniqueProperty);
         }
     }
 

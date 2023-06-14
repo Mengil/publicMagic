@@ -12,22 +12,22 @@ public class productMenues {
     static void mausMenu() {
         propertyArrayListHandler(MainShop.categoryPropertiesArrayList,"mausMenu", "Maus");
         Maus maus = new Maus("", "", 0.0, 0);
-        MainShop.propertiesAddOrEdit("Maus anlegen", "die Sensorauflösung (in dpi)", maus, "anlegen");
+        MainShop.propertiesAddOrEdit("Maus anlegen", "Eigenschaften","die Sensorauflösung (in dpi)", maus, "anlegen");
     }
     static void tastaturMenu() {
         propertyArrayListHandler(MainShop.categoryPropertiesArrayList,"tastaturMenu", "Tastatur");
         Tastatur tastatur = new Tastatur("", "", 0.0, "");
-        MainShop.propertiesAddOrEdit("Tastatur anlegen", "den Tastaturtyp", tastatur, "anlegen");
+        MainShop.propertiesAddOrEdit("Tastatur anlegen", "Eigenschaften","den Tastaturtyp", tastatur, "anlegen");
     }
     static void motherboardMenu() {
         propertyArrayListHandler(MainShop.categoryPropertiesArrayList,"motherboardMenu", "Motherboard");
         Motherboard motherboard = new Motherboard("", "", 0.0, "");
-        MainShop.propertiesAddOrEdit("Motherboard anlegen", "den Sockel", motherboard, "anlegen");
+        MainShop.propertiesAddOrEdit("Motherboard anlegen", "Eigenschaften","den Sockel", motherboard, "anlegen");
     }
     static void monitorMenu() {
         propertyArrayListHandler(MainShop.categoryPropertiesArrayList,"monitorMenu", "Monitor");
         Monitor monitor = new Monitor("", "", 0.0, 0.0);
-        MainShop.propertiesAddOrEdit("Monitor anlegen", "die Größe(Zoll)", monitor, "anlegen");
+        MainShop.propertiesAddOrEdit("Monitor anlegen", "Eigenschaften","die Größe(Zoll)", monitor, "anlegen");
     }
     public static void propertyArrayListHandler(ArrayList<String> propertyArrayList, String menuName, String productCategory){
         String[] propertiesToRemove = {"Größe(Zoll)", "Monitor Speichern", "Sockel", "Motherboard Speichern", "Tastentyp", "Tastatur Speichern", "Auflösung(dpi)", "Maus Speichern"};

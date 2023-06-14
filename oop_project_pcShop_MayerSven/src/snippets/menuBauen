@@ -1,48 +1,33 @@
 
 
-        // Nach erneuter Suche oder Hauptmenü fragen
-        System.out.println("Möchten Sie erneut suchen? (ja/nein)");
-        String antwort = scanner.nextLine().toLowerCase();
-
-        if (antwort.equals("nein")) {
-            // Zurück zum Hauptmenü
-            return;
-        } else if (!antwort.equals("ja")) {
-            System.out.println("Fehlerhafte Eingabe.");
-            // Zurück zum Hauptmenü
-            return;
-        }
+private void productSetterBundle(Product product, String brand, String model, Double price){
+    product.setProductBrand(brand);
+    product.setProductModel(model);
+    product.setProductPrice(price);
     }
 }
 
-public static boolean containsValue(Product product, String suchbegriff) {
-    if (product.getProductBrand().toLowerCase().contains(suchbegriff)
-            || product.getProductModel().toLowerCase().contains(suchbegriff)
-            || String.valueOf(product.getProductPrice()).toLowerCase().contains(suchbegriff)) {
-        return true;
-    }
+ ((Monitor) product).setScreenSizeInch(newScreenSizeInch);
+ ((Maus) product).setSensorResolution(newSensorResolution);
+ ((Motherboard) product).setMotherboardSocket(newMotherboardSocket);
+ ((Tastatur) product).setKeyboardType(newKeyboardType);
 
-    if (product instanceof Maus) {
-        Maus maus = (Maus) product;
-        if (String.valueOf(maus.getSensorResolution()).toLowerCase().contains(suchbegriff)) {
-            return true;
-        }
-    } else if (product instanceof Monitor) {
-        Monitor monitor = (Monitor) product;
-        if (String.valueOf(monitor.getScreenSizeInch()).toLowerCase().contains(suchbegriff)) {
-            return true;
-        }
+
+
+
+private void setProductProperties(Product product, String brand, String model, Double price) {
+    product.setProductBrand(brand);
+    product.setProductModel(model);
+    product.setProductPrice(price);
+
+    if (product instanceof Monitor) {
+        ((Monitor) product).setScreenSizeInch(newScreenSizeInch);
+    } else if (product instanceof Maus) {
+        ((Maus) product).setSensorResolution(newSensorResolution);
     } else if (product instanceof Motherboard) {
-        Motherboard motherboard = (Motherboard) product;
-        if (motherboard.getMotherboardSocket().toLowerCase().contains(suchbegriff)) {
-            return true;
-        }
+        ((Motherboard) product).setMotherboardSocket(newMotherboardSocket);
     } else if (product instanceof Tastatur) {
-        Tastatur tastatur = (Tastatur) product;
-        if (tastatur.getKeyboardType().toLowerCase().contains(suchbegriff)) {
-            return true;
-        }
+        ((Tastatur) product).setKeyboardType(newKeyboardType);
     }
-
-    return false;
 }
+

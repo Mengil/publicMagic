@@ -17,4 +17,9 @@ public class Motherboard extends Product {
     public void getMotherboard(){
         classOutputFormatter(getProductPrice(), getMotherboardSocket(), "Motherboard");
     }
+
+    @Override
+    public String toString() {
+        return "Ausgewählt: " + getProductModel() + " - " + getProductBrand() + " - " +getProductPrice() + "€ - " + getMotherboardSocket();
+    }
 }

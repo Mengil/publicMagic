@@ -19,4 +19,8 @@ public class Maus extends Product {
         classOutputFormatter(getProductPrice(), String.valueOf(getSensorResolution()), "Maus");
     }
 
+    @Override
+    public String toString() {
+        return "Ausgewählt: " + getProductModel() + " - " + getProductBrand() + " - " +getProductPrice() + "€ - " + getSensorResolution() + "dpi";
+    }
 }

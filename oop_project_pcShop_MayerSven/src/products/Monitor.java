@@ -18,4 +18,8 @@ public class Monitor extends Product {
     public void getMonitor(){
         classOutputFormatter(getProductPrice(), String.valueOf(getScreenSizeInch()), "Monitor");
     }
+    @Override
+    public String toString() {
+        return "Ausgewählt: " + getProductModel() + " - " + getProductBrand() + " - " +getProductPrice() + "€ - " + getScreenSizeInch() + " Zoll";
+    }
 }

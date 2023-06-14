@@ -18,4 +18,9 @@ public class Tastatur extends Product {
     public void getTastatur(){
         classOutputFormatter(getProductPrice(), getKeyboardType(), "Tastatur");
     }
+
+    @Override
+    public String toString() {
+        return "Ausgewählt: " + getProductModel() + " - " + getProductBrand() + " - " +getProductPrice() + "€ - " + getKeyboardType();
+    }
 }

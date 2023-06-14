@@ -3,9 +3,9 @@ import products.Monitor;
 import products.Motherboard;
 import products.Tastatur;
 
-public class addDummyData {
+public class dummyData {
 
-    public static void dummyData(){
+    public static void dummyDataAdd(){
         Maus maus = new Maus("Corsair", "Gaming M65 RGB Ultra", 49.90, 26000);
         MainShop.mausArrayList.add(maus);
         Monitor monitor = new Monitor("Philips", "Gaming-Monitor E-line 272E1GAJ", 138.99, 27.03);
@@ -16,9 +16,10 @@ public class addDummyData {
         MainShop.tastaturArrayList.add(tastatur);
         Tastatur tastatur2 = new Tastatur("Sharkoon", "Skiller SGK5", 33.90,"Rubber Dome");
         MainShop.tastaturArrayList.add(tastatur2);
-        addDummyData("Maus", 1, 1);
-        addDummyData("Monitor", 1, 1);
-        addDummyData("Motherboard", 1, 1);
+        addDummyData("Maus", 1, 2);
+        addDummyData("Monitor", 1, 2);
+        addDummyData("Motherboard", 1, 2);
+        addDummyData("Tastatur", 1, 2);
     }
 
     public static void addDummyData(String productCategory, Integer productMin, Integer productMax){
@@ -51,6 +52,16 @@ public class addDummyData {
                     String socket = "socket" + i;
                     Motherboard motherboard = new Motherboard(productBrand, productModel, productPrice, socket);
                     MainShop.motherboardArrayList.add(motherboard);
+                }
+            }
+            case "Tastatur" -> {
+                for (int i = productMin; i <= productMax; i++) {
+                    String productBrand = productCategory + "Marke" + i;
+                    String productModel = productCategory + "Modell" + i;
+                    Double productPrice = (double) i;
+                    String keyboardType = "Tastaturentyp" + i;
+                    Tastatur tastatur = new Tastatur(productBrand, productModel, productPrice, keyboardType);
+                    MainShop.tastaturArrayList.add(tastatur);
                 }
             }
 //            case "Tastatur" ->;
