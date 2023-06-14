@@ -1,10 +1,21 @@
-import products.Maus;
-import products.Monitor;
-import products.Motherboard;
-import products.Tastatur;
+import productCategories.Maus;
+import productCategories.Monitor;
+import productCategories.Motherboard;
+import productCategories.Tastatur;
 
+/**
+ * Provides a method to add dummy data to the product lists in the MainShop Class for testing purposes.
+ * To create instances of different product categories, such as "Maus", "Motherboard", "Monitor" and "Tastatur"
+ * and adds them to the corresponding ArrayLists in MainShop.
+ * @author Sven Mayer
+ * @version 1.0
+ * @since 14.06.23
+ */
 public class dummyData {
 
+    /**
+     * To add specific instances of each prdocut category to the lists.
+     */
     public static void dummyDataAdd(){
         Maus maus = new Maus("Corsair", "Gaming M65 RGB Ultra", 49.90, 26000);
         MainShop.mausArrayList.add(maus);
@@ -22,6 +33,12 @@ public class dummyData {
         addDummyData("Tastatur", 1, 2);
     }
 
+    /**
+     * To add a range of dummy data for a specific product category.
+     * @param productCategory The category of the product.
+     * @param productMin      The minimum amount of dummy data to generate.
+     * @param productMax      The maximum amount of dummy data to generate.
+     */
     public static void addDummyData(String productCategory, Integer productMin, Integer productMax){
         switch(productCategory){
             case "Maus" -> {
@@ -64,7 +81,6 @@ public class dummyData {
                     MainShop.tastaturArrayList.add(tastatur);
                 }
             }
-//            case "Tastatur" ->;
         }
     }
 }
