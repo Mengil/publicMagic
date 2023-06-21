@@ -7,7 +7,7 @@ package productCategories;
  * @since 14.06.23
  */
 public class Maus extends Product {
-    private Integer sensorResolution;
+    private String sensorResolution;
 
     /**
      * For constructing a new mouse object with the specified properties.
@@ -16,7 +16,7 @@ public class Maus extends Product {
      * @param productPrice The price of the mouse, e.g. "33,9€".
      * @param sensorResolution The unique property of the mouse, measured in "dpi".
      */
-    public Maus(String productBrand, String productModel, Double productPrice, Integer sensorResolution){
+    public Maus(String productBrand, String productModel, Double productPrice, String sensorResolution){
         super(productBrand, productModel, productPrice);
         this.sensorResolution = sensorResolution;
     }
@@ -25,7 +25,7 @@ public class Maus extends Product {
      * To get the sensor resolution of the mouse.
      * @return Hands over the sensor resolution for further usage.
      */
-    public Integer getSensorResolution() {
+    public String getSensorResolution() {
         return sensorResolution;
     }
 
@@ -33,7 +33,7 @@ public class Maus extends Product {
      * To set the sensor resolution value of the mouse.
      * @param sensorResolution To make sure the provided sensorResolution value is transferred to the private Integer sensorResolution.
      */
-    public void setSensorResolution(Integer sensorResolution) {
+    public void setSensorResolution(String sensorResolution) {
         this.sensorResolution = sensorResolution;
     }
 
@@ -48,6 +48,6 @@ public class Maus extends Product {
      */
     @Override
     public String toString() {
-        return getProductModel() + " - " + getProductBrand() + " - " +getProductPrice() + "€ - " + getSensorResolution() + "dpi";
+        return getProductModel() + " - " + getProductBrand() + " - " +getProductPrice() + "€ - " + getSensorResolution() + " dpi";
     }
 }

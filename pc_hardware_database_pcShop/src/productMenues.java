@@ -22,7 +22,7 @@ public class productMenues {
      */
     static void mausMenu() {
         propertyArrayListHandler(MainShop.categoryPropertiesArrayList,"mausMenu", "Maus");
-        Maus maus = new Maus("", "", 0.0, 0);
+        Maus maus = new Maus("", "", 0.0, "0");
         MainShop.propertiesAddOrEdit("\t\t\tMaus anlegen", "Eigenschaften","die Sensorauflösung (in dpi)", maus, "hinzufügen");
     }
 

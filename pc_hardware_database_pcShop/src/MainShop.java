@@ -22,7 +22,8 @@ public class MainShop {
     static ArrayList<Motherboard> motherboardArrayList = new ArrayList<>();
     static ArrayList<Tastatur> tastaturArrayList = new ArrayList<>();
     public static String newProductBrand, newProductModel, newMotherboardSocket, newKeyboardType;
-    public static Integer newSensorResolution;
+//    public static Integer newSensorResolution;
+    public static String newSensorResolution;
     public static Double newProductPrice, newScreenSizeInch;
 
     /**
@@ -32,7 +33,7 @@ public class MainShop {
      * @param args Array of strings that can be used to modify the way the application behaves.
      */
     public static void main(String[] args) {
-//        dummyData.dummyDataAdd();
+        dummyData.dummyDataAdd();
         hauptMenue();
     }
 
@@ -107,6 +108,8 @@ public class MainShop {
                         productMenues.propertyArrayListHandler(categoryPropertiesArrayList, "tastaturMenu", "Tastatur");
                         propertiesAddOrEdit("\t\t\tTastatur bearb.",selectedTastatur.toString(),"den Tastaturen-Typ", selectedTastatur, "bearbeiten");
                     }
+                } else if (productEditInput > productCount){
+                    errorMessageAndQuit("wrongInput");
                 }
             } catch (NumberFormatException | InputMismatchException e) {
                 menuScanner.reset();
@@ -283,12 +286,12 @@ public class MainShop {
                     System.out.println("Gebe " + uniqueProperty + " an:");
                     String productUnique = menuScanner.next().toLowerCase();
                     if (product instanceof Maus) {
-                        int dpi = Integer.parseInt(productUnique.replace(",", "").replace("dpi", ""));
+                        String dpi = productUnique.replace(",", "").replace(" dpi", "");
+//                        int dpi = Integer.parseInt(productUnique.replace(",", "").replace("dpi", ""));
                         if(addOrEdit.equals("hinzufügen")){
                             try {
                                 newSensorResolution = dpi;
-                                Integer newSensorResolution = dpi;
-                                ((Maus) product).setSensorResolution(newSensorResolution);
+                                ((Maus) product).setSensorResolution(dpi);
                             } catch (NumberFormatException e) {
                                 errorMessageAndQuit("wrongInput");
                             }
@@ -499,7 +502,7 @@ public class MainShop {
         boolean isBasePropertyEmptyNull = product.getProductBrand().isEmpty() || product.getProductModel().isEmpty() || product.getProductPrice() == 0.0 ||
                 newProductBrand == null || newProductModel == null || newProductPrice == null;
         return switch (productCategory) {
-            case "Maus" -> isBasePropertyEmptyNull || ((Maus) product).getSensorResolution() == 0 || newSensorResolution == null;
+            case "Maus" -> isBasePropertyEmptyNull || ((Maus) product).getSensorResolution().equals("") || newSensorResolution == null;
             case "Monitor" -> isBasePropertyEmptyNull || ((Monitor) product).getScreenSizeInch() == 0.0 || newScreenSizeInch == null;
             case "Motherboard" -> isBasePropertyEmptyNull || ((Motherboard) product).getMotherboardSocket().isEmpty() || newMotherboardSocket == null;
             case "Tastatur" -> isBasePropertyEmptyNull || ((Tastatur) product).getKeyboardType().isEmpty() || newKeyboardType == null;
