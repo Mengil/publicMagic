@@ -10,7 +10,7 @@ import java.text.DecimalFormat;
  * @version 1.0
  * @since 14.06.23
  */
-public class Product {
+public abstract class Product {
     private String productBrand, productModel;
     private Double productPrice;
 
