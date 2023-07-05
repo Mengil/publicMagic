@@ -5,12 +5,13 @@ out/
 
 publicMagic/publicMagic.iml
 publicMagic/.idea
-publicMagic/oop_project_pcShop_MayerSven/.idea
-publicMagic/oop_project_pcShop_MayerSven/oop_project_pcShop_MayerSven.iml
-publicMagic/oop_project_pcShop_MayerSven/.idea/vcs.xml
-oop_project_pcShop_MayerSven/.idea
-oop_project_pcShop_MayerSven/oop_project_pcShop_MayerSven.iml
-oop_project_pcShop_MayerSven/.idea/vcs.xml
+publicMagic/pc_hardware_database_pcShop/.idea
+publicMagic/pc_hardware_database_pcShop/oop_project_pcShop_MayerSven.iml
+publicMagic/pc_hardware_database_pcShop/.idea/vcs.xml
+pc_hardware_database_pcShop/.idea
+pc_hardware_database_pcShop/oop_project_pcShop_MayerSven.iml
+pc_hardware_database_pcShop/.idea/vcs.xml
+pc_hardware_database_pcShop/production
 
 ### Eclipse ###
 .apt_generated
