@@ -5,7 +5,7 @@ import java.lang.reflect.Method;
 import java.util.*;
 
 /**
- * PC Shop database management programme for computer hardware
+ * PC Shop database management program for computer hardware
  * The user can create products. He can also view, edit or delete existing ones.
  * For each product, the user must enter brand, model, price and characteristics.
  * The user can search for specific terms and characters within the product properties.
